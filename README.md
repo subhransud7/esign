@@ -29,6 +29,7 @@ POST API:
  Things need to be improved:
  1. Check whether uploaded document is pdf or not.
  2. Other validations of param
- 3. Testing
+ 3. Proper Error Status Code
+ 3. Handling Error Code of External API 
  
  
