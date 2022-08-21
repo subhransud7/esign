@@ -5,6 +5,7 @@ import com.digio.esign.service.AttachmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,8 +23,13 @@ public class AttachmentController {
 
     @PostMapping("/document")
     public Resource uploadFile(@RequestPart("file") MultipartFile file,
-                                   @RequestPart("metadata") Document document) throws IOException {
-       // attachmentService.validateAttachment(file,document);
+                                   @RequestPart("metadata") Document document) throws Exception {
+       //attachmentService.validateAttachment(file,document);
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(fileName.contains("..")) {
+            throw  new Exception("Filename contains invalid path sequence"
+                    + fileName);
+        }
         if(document.getSigners().get(0).getIdentifier() == null){
             throw new IllegalStateException("Email/MobileNumber is required");
         }
