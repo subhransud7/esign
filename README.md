@@ -12,7 +12,9 @@ POST API:
  1. http://localhost:8081/document  
     - In Body as form-data, 
     For KEY:file  VALUE:Upload a pdf file
+    
     For KEY:metada VALUE:metadata in JSON  CONTENT TYPE:application/json
+    
     Example: {
               "signers": [{
                   "identifier": "8249085867",
